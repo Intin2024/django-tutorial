@@ -36,7 +36,7 @@ python3 manage.py migrate
 python3 manage.py createsuperuser
 ```
 
-# Criar app
+## Criar app
 - Criar um novo app
 ```
 python3 manage.py startapp musicas
@@ -54,4 +54,32 @@ python3 manage.py migrate
 - Registrar no site do admin, no arquivo `admin.py`
 ```python3
 admin.site.register(Modelo)
+```
+
+## Criar páginas
+- Criar pasta `templates` dentro do app
+- Adicionar página html à pasta
+- Criar função de view no arquivo `views.py`
+```python3
+def home(request):
+    return render(request, 'home.html')
+```
+- Criar arquivo `urls.py` no app
+```python3
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home')
+]
+```
+- Modificar a lista urlpatterns do arquivo `urls.py` do site
+```python3
+from django.contrib import admin
+from django.urls import path, include # adiciona include à importação
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('musicas.urls')) # importa urls do app
+]
 ```
