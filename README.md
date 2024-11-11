@@ -83,3 +83,19 @@ urlpatterns = [
     path('', include('musicas.urls')) # importa urls do app
 ]
 ```
+- Adicionar as configurações de arquivos estáticos no arquivo de `settings.py`
+```python3
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+```
+- Criar uma pasta `static` dentro do app
+- Criar um arquivo css na pasta `static`
+- Modificar o arquivo html para carregar os arquivos estáticos e linkar o arquivo css
+```jinja
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+</html>
+```
