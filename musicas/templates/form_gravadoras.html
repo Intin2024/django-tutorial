@@ -2,6 +2,7 @@
 {% block content %}
     <h3>Nova Gravadora</h3>
     <form method="POST">
+        {% csrf_token %}
         <input name="nome"/>
         <textarea name="endereco"></textarea>
         <button type="submit">Enviar</button>
