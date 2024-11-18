@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>Gravadoras</h3>
+    <ul>
+    {% for gravadora in gravadoras %}
+        <li>{{gravadora.nome}}</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'cria-gravadoras' %}">Nova Gravadora</a>
+{% endblock %}
