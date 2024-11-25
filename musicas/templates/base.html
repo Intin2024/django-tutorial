@@ -10,6 +10,12 @@
 <body>
     <header>
         <h1>Músicas</h1>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Sair</a>
+        {% else %}
+            <a href="{% url 'cria-usuario' %}">Crie uma conta</a>
+            <a href="{% url 'login' %}">Entrar</a>
+        {% endif %}
     </header>
     <main>
         {% block content %}
