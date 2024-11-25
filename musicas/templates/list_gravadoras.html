@@ -6,9 +6,11 @@
     {%else%}
         <ul>
         {% for gravadora in gravadoras %}
-            <li>{{gravadora.nome}} - <a href="{% url 'edita-gravadoras' gravadora.id %}">Editar</a> - <a href="{% url 'remove-gravadoras' gravadora.id%}">Remover</a></li>
+            <li>{{gravadora.nome}} {% if user.is_authenticated %} - <a href="{% url 'edita-gravadoras' gravadora.id %}">Editar</a> - <a href="{% url 'remove-gravadoras' gravadora.id%}">Remover</a> {% endif %} </li>
         {% endfor %}
         </ul>
     {% endif %}
-    <a href="{% url 'cria-gravadoras' %}">Nova Gravadora</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'cria-gravadoras' %}">Nova Gravadora</a>
+    {% endif %}
 {% endblock %}
