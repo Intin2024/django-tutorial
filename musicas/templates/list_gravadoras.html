@@ -3,7 +3,7 @@
     <h3>Gravadoras</h3>
     <ul>
     {% for gravadora in gravadoras %}
-        <li>{{gravadora.nome}}</li>
+        <li>{{gravadora.nome}} - <a href="{% url 'edita-gravadoras' gravadora.id %}">Editar</a></li>
     {% endfor %}
     </ul>
     <a href="{% url 'cria-gravadoras' %}">Nova Gravadora</a>

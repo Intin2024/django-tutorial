@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h3>Nova Gravadora</h3>
+    {% if gravadora is not None %}
+        <h3>Editar Gravadora</h3>
+    {% else %}
+        <h3>Nova Gravadora</h3>
+    {% endif %}
+    
     <form method="POST">
         {% csrf_token %}
-        <input name="nome"/>
-        <textarea name="endereco"></textarea>
+        <input name="nome" value="{{ gravadora.nome }}"/>
+        <textarea name="endereco">{{ gravadora.endereco }}</textarea>
         <button type="submit">Enviar</button>
     </form>
 {% endblock %}
