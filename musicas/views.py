@@ -30,3 +30,9 @@ def update_records(request, id):
         gravadora.save()
         return redirect('lista-gravadoras')
     return render(request, 'form_gravadoras.html', {'gravadora': gravadora})
+
+
+def remove_records(request, id):
+    gravadora = get_object_or_404(Gravadora, pk=id)
+    gravadora.delete()
+    return redirect('lista-gravadoras')

@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
     <h3>Gravadoras</h3>
-    <ul>
-    {% for gravadora in gravadoras %}
-        <li>{{gravadora.nome}} - <a href="{% url 'edita-gravadoras' gravadora.id %}">Editar</a></li>
-    {% endfor %}
-    </ul>
+    {% if gravadoras|length == 0 %}
+        <p>Não há gravadoras registradas</p>
+    {%else%}
+        <ul>
+        {% for gravadora in gravadoras %}
+            <li>{{gravadora.nome}} - <a href="{% url 'edita-gravadoras' gravadora.id %}">Editar</a> - <a href="{% url 'remove-gravadoras' gravadora.id%}">Remover</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
     <a href="{% url 'cria-gravadoras' %}">Nova Gravadora</a>
 {% endblock %}
