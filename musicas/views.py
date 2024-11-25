@@ -1,9 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotFound
 from .models import Gravadora
+from django.contrib.auth.models import User
+
 
 def home(request):
     return render(request, 'home.html')
+
+
+def create_user(request):
+    if request.method=="POST":
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user = User.objects.create_user(username, email, password)
+        user.save()
+        return redirect('login')
+    return render(request, 'registration/create.html')
 
 def list_records(request):
     gravadoras = Gravadora.objects.all()
