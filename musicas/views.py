@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotFound
 from .models import Gravadora
 from django.contrib.auth.models import User
-
+from django.contrib.auth import login
 
 def home(request):
     return render(request, 'home.html')
@@ -15,7 +15,8 @@ def create_user(request):
         password = request.POST.get("password")
         user = User.objects.create_user(username, email, password)
         user.save()
-        return redirect('login')
+        login(request, user)
+        return redirect('home')
     return render(request, 'registration/create.html')
 
 def list_records(request):

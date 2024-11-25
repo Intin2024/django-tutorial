@@ -11,6 +11,7 @@
     <header>
         <h1>Músicas</h1>
         {% if user.is_authenticated %}
+            <p>Bem-vindo {{ user }}</p>
             <a href="{% url 'logout' %}">Sair</a>
         {% else %}
             <a href="{% url 'cria-usuario' %}">Crie uma conta</a>
