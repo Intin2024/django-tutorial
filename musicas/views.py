@@ -23,7 +23,7 @@ def list_records(request):
     return render(request, 'list_gravadoras.html', {"gravadoras": gravadoras})
 
 def create_records(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         # return HttpResponseNotFound("")
         return redirect('lista-gravadoras')
     if request.method=="POST":
@@ -38,7 +38,7 @@ def create_records(request):
 
 
 def update_records(request, id):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         # return HttpResponseNotFound("")
         return redirect('lista-gravadoras')
     gravadora = get_object_or_404(Gravadora, pk=id)
@@ -53,7 +53,7 @@ def update_records(request, id):
 
 
 def remove_records(request, id):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         # return HttpResponseNotFound("")
         return redirect('lista-gravadoras')
     gravadora = get_object_or_404(Gravadora, pk=id)
