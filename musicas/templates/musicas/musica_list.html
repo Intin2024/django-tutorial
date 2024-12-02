@@ -1,0 +1,18 @@
+{% extends '../base.html' %}
+{% block content %}
+
+<h3>Músicas</h3>
+    {% if musicas|length == 0 %}
+        <p>Não há músicas registradas</p>
+    {%else%}
+        <ul>
+            {% for musica in musicas %}
+                <li>{{musica.titulo}} - {{musica.autor}} {% if user.is_staff %} - <a href="{% url 'edita-musicas' musica.id %}">Editar</a> {% endif %} - <a href="{% url 'remove-musicas' musica.id%}">Remover</a> </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if user.is_staff %}
+        <a href="{% url 'cria-musicas' %}">Nova Música</a>
+    {% endif %}
+    
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends '../base.html' %}
+{% block content %}
+<p>Tem certeza que deseja remover a música {{ object.titulo}} de {{ object.autor }}</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Remover</button>
+</form>
+{% endblock %}

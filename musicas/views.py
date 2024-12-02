@@ -1,11 +1,17 @@
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotFound
-from .models import Gravadora
+from .models import Gravadora, Musica
 from django.contrib.auth.models import User
 from django.contrib.auth import login
+from django.views.generic import TemplateView, ListView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-def home(request):
-    return render(request, 'home.html')
+
+
+class HomeView(TemplateView):
+    template_name = 'home.html'
+    # return render(request, 'home.html')
 
 
 def create_user(request):
@@ -60,3 +66,25 @@ def remove_records(request, id):
     gravadora = get_object_or_404(Gravadora, pk=id)
     gravadora.delete()
     return redirect('lista-gravadoras')
+
+
+# Musicas
+
+class MusicListView(ListView):
+    model = Musica
+    context_object_name = 'musicas'
+
+class MusicCreateView(CreateView):
+    model = Musica
+    fields = ['titulo', 'autor', 'is_single', 'gravadora']
+    success_url = reverse_lazy('lista-musicas')
+
+
+class MusicUpdateView(UpdateView):
+    model = Musica
+    fields = ['titulo', 'autor', 'is_single', 'gravadora']
+    success_url = reverse_lazy('lista-musicas')
+
+class MusicDeleteView(DeleteView):
+    model = Musica
+    success_url = reverse_lazy('lista-musicas')
